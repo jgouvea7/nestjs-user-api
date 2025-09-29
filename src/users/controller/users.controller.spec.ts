@@ -14,7 +14,6 @@ describe('UsersController', () => {
       findAll: jest.fn(),
       findOne: jest.fn(),
       removeAllUsers: jest.fn(),
-      removeUser: jest.fn(),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -34,7 +33,7 @@ describe('UsersController', () => {
   });
 
   describe('create', () => {
-    it('should call service.createUser and return user', async () => {
+    it('Chama o servico createUser e retorna o usuario', async () => {
       const dto: CreateUserDto = { name: 'Jon', email: 'jon@test.com' };
       const mockResult = { id: 'uuid', ...dto };
       service.createUser.mockResolvedValue(mockResult);
@@ -44,7 +43,7 @@ describe('UsersController', () => {
       expect(result).toEqual(mockResult);
     });
 
-    it('should throw error if service throws', async () => {
+    it('Chama e exception email já cadastrado', async () => {
       const dto: CreateUserDto = { name: 'Jon', email: 'jon@test.com' };
       service.createUser.mockRejectedValue(new BadRequestException('Email já cadastrado'));
 
@@ -53,7 +52,7 @@ describe('UsersController', () => {
   });
 
   describe('findAll', () => {
-    it('should return all users', async () => {
+    it('Retorna todos os usuarios', async () => {
       const users = [{ id: 'uuid', name: 'Jon', email: 'jon@test.com' }];
       service.findAll.mockResolvedValue(users);
 
@@ -64,7 +63,7 @@ describe('UsersController', () => {
   });
 
   describe('findOne', () => {
-    it('should return user by id', async () => {
+    it('Retorna usuario pelo ID', async () => {
       const user = { id: 'uuid', name: 'Jon', email: 'jon@test.com' };
       service.findOne.mockResolvedValue(user);
 
@@ -73,7 +72,7 @@ describe('UsersController', () => {
       expect(result).toEqual(user);
     });
 
-    it('should throw error if service throws', async () => {
+    it('Retorna exception do usuario não encontrado', async () => {
       service.findOne.mockRejectedValue(new BadRequestException('Usuário não encontrado'));
 
       await expect(controller.findOne('uuid')).rejects.toThrow(BadRequestException);
