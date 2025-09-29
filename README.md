@@ -38,6 +38,16 @@ npm run start:dev
 | GET    | `/usuarios/:id`   | Buscar usuário por ID         | 200 OK / 404 Not Found |
 | DELETE | `/usuarios`       | Remover todos os usuários     | 200 OK            |
 
+### Exemplos de requisição
+
+**Criar usuário:**
+
+```json
+{
+  "name": "Jonnathas",
+  "email": "jonnathas@example.com"
+}
+```
 
 ## Testes 
 Para rodar os testes unitários:
